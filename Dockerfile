@@ -6,12 +6,14 @@ LABEL org.label-schema.vcs-url="https://github.com/rhyw/alpine-py39.git"
 LABEL org.label-schema.image-url="quay.io/yuwang/py39-alpine-pgsql"
 
 # Uncomment if you have problem download from offical cdn repo
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 ARG PIP_INDEX_URL
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 
 WORKDIR /app
+
+COPY requirements.txt .
 
 RUN apk add --no-cache \
         postgresql-dev \
